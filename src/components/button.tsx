@@ -1,25 +1,29 @@
-/* /components/button.tsx  */
+/* /components/Button.tsx  */
 
 type ButtonType = 'button' | 'submit' | 'reset';
-interface Props {
+interface ButtonProps {
   children: React.ReactNode;
-  handleClick?: () => void;
-  styles: string;
+  onClick?: () => void;
+  className?: string;
   type?: ButtonType;
   title: string;
 }
 
-const Button = (props:Props) => {
+export const Button = ({
+  children,
+  onClick,
+  className = '',
+  type = 'button',
+  title,
+}: ButtonProps) => {
   return (
-      <button
-      onClick={props?.handleClick}
-      className={`${props.styles} px-3 py-2 rounded-lg font-medium border-2 border-transparent`}
-      type={props?.type}
-      title={props.title}
-      >
-          {props.children}
-      </button>
-  )
-}
-
-export default Button
+    <button
+      onClick={() => console.log(title)}
+      className={`text-gray-50 px-16 py-2 rounded-lg font-medium border-2 border-transparent ${className}`}
+      type={type}
+      title={title}
+    >
+      {children}
+    </button>
+  );
+};
