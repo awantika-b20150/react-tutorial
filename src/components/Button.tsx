@@ -11,7 +11,6 @@ interface ButtonProps {
 
 export const Button = ({
   children,
-  onClick,
   className = '',
   type = 'button',
   title,

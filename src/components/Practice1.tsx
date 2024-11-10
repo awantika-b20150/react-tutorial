@@ -1,7 +1,6 @@
 import React, { ComponentProps } from 'react';
 import {Button} from "./Button";
 
-// type Practice1Props = ComponentProps<typeof Button>;
 export default function Practice1()
 {
     return(
