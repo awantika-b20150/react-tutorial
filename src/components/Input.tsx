@@ -22,7 +22,7 @@ const Input=({
           title={title}
           className={'w-4 h-4 text-blue-600 ${className}'}
         />
-        <label>{isChecked ? title:""}</label>
+        <label className="text-sm font-medium text-gray-900 dark:text-gray-300">{isChecked ? title:""}</label>
         </div>
     </>
   );
