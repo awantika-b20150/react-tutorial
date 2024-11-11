@@ -6,23 +6,28 @@ interface InputProps {
     title: string;
   }
 
+
+
 const Input=({
     className = '',
     title,
   }: InputProps)=> {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
+  function handleChange() {
+    setIsChecked((prev) => !prev);
+  }
   return (
     <>
       <div className="flex gap-2">
         <input
           type="checkbox"
           checked={isChecked}
-          onChange={() => setIsChecked((prev) => !prev)}
+          onChange={handleChange}
           title={title}
-          className={'w-4 h-4 text-blue-600 ${className}'}
+          className={`w-4 h-4 text-blue-600 ${className}`}
         />
-        <label className="text-sm font-medium text-gray-900 dark:text-gray-300">{isChecked ? title:""}</label>
+        {isChecked && <label className="text-sm font-medium text-gray-900 dark:text-gray-300">{title}</label>}
         </div>
     </>
   );
