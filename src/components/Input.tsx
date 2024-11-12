@@ -6,7 +6,7 @@ const SearchInput=()=> {
     const [value, setValue] = useState<string>("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        setValue(event.currentTarget.value);
+        setValue(event.currentTarget.value.trim());
       }
       const handleClick = () => 
       {
