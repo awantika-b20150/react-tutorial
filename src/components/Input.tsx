@@ -2,7 +2,7 @@ import { useState} from 'react';
 import Button from './Button';
 
 
-const Input=()=> {
+const SearchInput=()=> {
     const [value, setValue] = useState<string>("");
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -21,4 +21,4 @@ const Input=()=> {
   );
 }
 
-export default Input;
+export default SearchInput;
