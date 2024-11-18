@@ -3,7 +3,7 @@ import { object, string,InferType } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState} from 'react';
 import Button from '../components/Button'
-import ERROR_MESSAGE from '../messages'
+import ERROR_MESSAGE, { ERROR_MESSAGES } from '../messages'
 
 const validationSchema = object().shape({
   postalCode: string()
@@ -121,7 +121,7 @@ const Practice4: React.FC = () => {
             送信
           </Button>
         ) : (
-          <p className="text-red-500 mt-10">該当する住所がありません</p>
+          <p className="text-red-500 mt-10">{ERROR_MESSAGES.notFound}</p>
         )}
       </form>
     </div>
