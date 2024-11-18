@@ -51,7 +51,6 @@ const Practice4: React.FC = () => {
         {
           const response = await fetch("https://zipcloud.ibsnet.co.jp/api/search?zipcode="+pCodeVal);
           const fields = await response.json();
-          // console.log(fields);
           setValue("postalCode",pCodeVal);
           setValue("prefecture",fields.results[0].address1);
           setValue("city",fields.results[0].address2);
@@ -69,7 +68,7 @@ const Practice4: React.FC = () => {
       }
     };
   return (
-    <div className="m-auto flex flex-col gap-4 ...">
+    <div className="m-auto flex flex-col gap-4">
       <h1 className="text-4xl text-center mt-2">addressSearch</h1>
       <form onSubmit={onSubmit} className="m-auto flex flex-col gap-4" noValidate>
         <div className="relative flex flex-row gap-4">
