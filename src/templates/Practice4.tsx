@@ -3,15 +3,16 @@ import { object, string,InferType } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState} from 'react';
 import Button from '../components/Button'
+import ERROR_MESSAGE from '../messages'
 
-  const validationSchema = object().shape({
-    postalCode: string()
-      .required('必須項目です')
-      .matches(/^\d{7}$/, '7桁の数字を入力してください'),
-    prefecture: string().required('必須項目です'),
-    city: string()
-      .required('必須項目です'),
-  }).required();
+const validationSchema = object().shape({
+  postalCode: string()
+    .required(ERROR_MESSAGE.required)
+    .matches(/^\d{7}$/, ERROR_MESSAGE.not7digits),
+  prefecture: string().required(ERROR_MESSAGE.required),
+  city: string()
+    .required(ERROR_MESSAGE.required),
+}).required();
 
 type FormData = InferType<typeof validationSchema>;
 
@@ -87,7 +88,7 @@ const Practice4: React.FC = () => {
           <Button title="search" onClick={onSearch} className=' bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
           Search
           </Button>
-          {canSearch? (null):(<p className="text-xs italic text-red-500">必須項目です</p>)}
+          {canSearch? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
           </div>
           </div>
         </div>
