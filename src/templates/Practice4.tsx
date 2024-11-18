@@ -16,8 +16,8 @@ import Button from '../components/Button'
 type FormData = InferType<typeof validationSchema>;
 
 const Practice4: React.FC = () => {
-  const [canSubmit, setCanSubmit] = useState<Boolean>(true);
-  const [canSearch, setCanSearch] = useState<Boolean>(true);
+  const [canSubmit, isSubmittable] = useState<boolean>(true);
+  const [canSearch, isSearchable] = useState<boolean>(true);
   const {
     register,
     handleSubmit,
@@ -43,7 +43,7 @@ const Practice4: React.FC = () => {
       setValue("city",'');
       const pCodeVal = getValues('postalCode');
       if(!pCodeVal.trim())
-        setCanSearch(false);
+        isSearchable(false);
 
       else if(pCodeVal.length===7)
       { 
@@ -55,17 +55,17 @@ const Practice4: React.FC = () => {
           setValue("postalCode",pCodeVal);
           setValue("prefecture",fields.results[0].address1);
           setValue("city",fields.results[0].address2);
-          setCanSubmit(true);
+          isSubmittable(true);
         }
 
         catch (error) {
           setValue('city', '');
           setValue('prefecture', '');
-          setCanSubmit(false);
+          isSubmittable(false);
         } finally {
           trigger();
         }
-        setCanSearch(true);
+        isSearchable(true);
       }
     };
   return (
