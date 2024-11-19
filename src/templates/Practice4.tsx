@@ -30,7 +30,7 @@ const Practice4: React.FC = () => {
       prefecture: '',
       city: '',
     },
-    mode: 'onChange',
+    mode: 'onBlur',reValidateMode: 'onBlur',
   });
 
   // Form submission handler
@@ -69,7 +69,7 @@ const Practice4: React.FC = () => {
   return (
     <div className="m-auto flex flex-col gap-4">
       <h1 className="text-4xl text-center mt-2">addressSearch</h1>
-      <form onSubmit={onSubmit} className="m-auto flex flex-col gap-4" noValidate>
+      <form onSubmit={onSubmit} className="m-auto flex flex-col gap-4">
         <div className="relative flex flex-row gap-4">
           <label className="font-bold" htmlFor="postalCode">郵便番号</label>
           <div className="relative flex flex-row gap-2">
