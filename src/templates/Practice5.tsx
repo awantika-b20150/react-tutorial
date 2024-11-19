@@ -11,11 +11,11 @@ interface Data {
 const Practice5: React.FC = () => {
   const [todos, setTodos] = useState<Data[]>([]);
   const [task, setTask] = useState<string>('');
-  const [allSelected, areAllSelected] = useState<boolean>(false);
+  const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
 
   const selectAll = () => {
-    const newAllSelected = !allSelected;
-    areAllSelected(newAllSelected);
+    const newAllSelected = !isAllSelected;
+    setIsAllSelected(newAllSelected);
     setTodos(todos.map(todo => ({ ...todo, isChecked: newAllSelected })));
   };
   
@@ -47,7 +47,7 @@ const Practice5: React.FC = () => {
 
   const deleteSelected = () => {
     setTodos(todos.filter(todo => !todo.isChecked));
-    areAllSelected(false);
+    setIsAllSelected(false);
   };
 
   return (
@@ -77,7 +77,7 @@ const Practice5: React.FC = () => {
                 <th className="relative text-xl font-bold text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <input
                     type="checkbox"
-                    checked={allSelected}
+                    checked={isAllSelected}
                     onChange={selectAll}
                   />
                   {todos.some(todo => todo.isChecked) && (
