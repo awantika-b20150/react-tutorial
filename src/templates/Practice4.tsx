@@ -40,19 +40,17 @@ const Practice4: React.FC = () => {
 
   const onSearch = async() => 
     {
-      setValue("prefecture",'');
-      setValue("city",'');
-      const pCodeVal = getValues('postalCode');
-      if(!pCodeVal.trim())
+      const currentPostalCode = getValues('postalCode');
+      if(!currentPostalCode.trim())
         isSearchable(false);
 
-      else if(pCodeVal.length===7)
+      else if(currentPostalCode.length===7)
       { 
         try
         {
-          const response = await fetch("https://zipcloud.ibsnet.co.jp/api/search?zipcode="+pCodeVal);
+          const response = await fetch("https://zipcloud.ibsnet.co.jp/api/search?zipcode="+currentPostalCode);
           const fields = await response.json();
-          setValue("postalCode",pCodeVal);
+          setValue("postalCode",currentPostalCode);
           setValue("prefecture",fields.results[0].address1);
           setValue("city",fields.results[0].address2);
           isSubmittable(true);
