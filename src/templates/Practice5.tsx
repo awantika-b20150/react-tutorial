@@ -14,9 +14,11 @@ const Practice5: React.FC = () => {
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
 
   const selectAll = () => {
-    const newAllSelected = !isAllSelected;
-    setIsAllSelected(newAllSelected);
-    setTodos(todos.map(todo => ({ ...todo, isChecked: newAllSelected })));
+    setIsAllSelected(prevIsAllSelected => {
+      const newState = !prevIsAllSelected;
+      setTodos(todos => todos.map(todo => ({ ...todo, isChecked: newState })));
+      return newState;
+    });
   };
   
   const addTask = () => {
