@@ -1,8 +1,12 @@
 import { useState} from 'react';
 import Button from './Button';
 
+interface SearchInputProps
+{
+  title?:string;
+}
 
-const SearchInput=()=> {
+const SearchInput:React.FC<SearchInputProps>=()=> {
     const [value, setValue] = useState<string>("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=> {

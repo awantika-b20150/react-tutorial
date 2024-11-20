@@ -1,4 +1,4 @@
-import SearchInput from "../components/Input";
+import SearchInput from "../components/SearchInput";
 
 export default function Practice2()
 {
