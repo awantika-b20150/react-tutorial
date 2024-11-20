@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-interface Data {
+export interface Data {
   id: number;
   todayDate: string;
   taskName: string;
