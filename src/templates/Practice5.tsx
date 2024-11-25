@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-interface Data {
+interface Task {
   id: number;
   todayDate: string;
   taskName: string;
@@ -9,7 +9,7 @@ interface Data {
 }
 
 const Practice5: React.FC = () => {
-  const [todos, setTodos] = useState<Data[]>([]);
+  const [todos, setTodos] = useState<Task[]>([]);
   const [task, setTask] = useState<string>('');
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
 
@@ -27,7 +27,7 @@ const Practice5: React.FC = () => {
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1;
     let day = currentDate.getDate();
-    const newTodo: Data = {
+    const newTodo: Task = {
       id: Date.now(),
       todayDate: `${year}/${month}/${day}`,
       taskName: task,
