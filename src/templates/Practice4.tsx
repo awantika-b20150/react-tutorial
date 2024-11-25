@@ -4,7 +4,7 @@ import {useFormData} from '../hooks/useFormData';
 
 
 const Practice4: React.FC = () => {
-  const {register,canSubmit,canSearch,errors,onSubmit,onSearch} = useFormData();
+  const {register,isSubmittable,isSearchable,errors,onSubmit,onSearch} = useFormData();
   return (
     <div className="m-auto flex flex-col gap-4">
       <h1 className="text-4xl text-center mt-2">addressSearch</h1>
@@ -17,7 +17,7 @@ const Practice4: React.FC = () => {
             id="postalCode" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
             {...register('postalCode')}
           />
-          {canSearch && errors.postalCode && (
+          {isSearchable && errors.postalCode && (
             <p className="text-xs italic text-red-500">{errors.postalCode.message}</p>
           )}
           </div>
@@ -25,7 +25,7 @@ const Practice4: React.FC = () => {
           <Button title="search" onClick={onSearch} className=' bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
           Search
           </Button>
-          {canSearch? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
+          {isSearchable? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
           </div>
           </div>
         </div>
@@ -53,7 +53,7 @@ const Practice4: React.FC = () => {
           </div>
         </div>
 
-        {canSubmit ? (
+        {isSubmittable ? (
           <Button title="submit" type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded'>
             送信
           </Button>

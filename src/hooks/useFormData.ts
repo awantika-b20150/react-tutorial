@@ -16,8 +16,8 @@ const validationSchema = object().shape({
 type FormData = InferType<typeof validationSchema>;
 
 export const useFormData = () => {
-  const [canSubmit, isSubmittable] = useState<boolean>(true);
-  const [canSearch, isSearchable] = useState<boolean>(true);
+  const [isSubmittable, setIsSubmitttable] = useState<boolean>(true);
+  const [isSearchable, setIsSearchable] = useState<boolean>(true);
   const {
     register,
     handleSubmit,
@@ -41,7 +41,7 @@ export const useFormData = () => {
     {
       const currentPostalCode = getValues('postalCode');
       if(!currentPostalCode.trim())
-        isSearchable(false);
+        setIsSearchable(false);
 
       else if(currentPostalCode.length===7)
       { 
@@ -52,20 +52,20 @@ export const useFormData = () => {
           setValue("postalCode",currentPostalCode);
           setValue("prefecture",fields.results[0].address1);
           setValue("city",fields.results[0].address2);
-          isSubmittable(true);
+          setIsSubmitttable(true);
         }
 
         catch (error) {
           setValue('city', '');
           setValue('prefecture', '');
-          isSubmittable(false);
+          setIsSubmitttable(false);
         } finally {
           trigger();
         }
-        isSearchable(true);
+        setIsSearchable(true);
       }
     };
     return {
-        register,errors,canSubmit,canSearch,onSubmit,onSearch,
+        register,errors,isSubmittable,isSearchable,onSubmit,onSearch,
       };
 }
