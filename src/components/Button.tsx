@@ -18,7 +18,7 @@ export const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`text-gray-50 px-16 py-2 rounded-lg font-medium border-2 border-transparent 'bg-gray-500 hover:bg-gray-70 rounded'`}
+      className={`text-gray-50 px-16 py-2 rounded-lg font-medium border-2 border-transparent 'bg-gray-500 hover:bg-gray-70`}
       type={type}
       title={title}
     >
