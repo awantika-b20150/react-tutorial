@@ -1,5 +1,5 @@
 interface UserInputProps {
-    onChange?: (e: any) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick?: () => void;
     className?: string;
     value: string;
