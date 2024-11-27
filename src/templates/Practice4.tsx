@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Button from '../components/Button'
 import ERROR_MESSAGE, { ERROR_MESSAGES } from '../messages'
 import {useFormData} from '../hooks/useFormData';
@@ -5,6 +6,76 @@ import {useFormData} from '../hooks/useFormData';
 
 const Practice4: React.FC = () => {
   const {register,isSubmittable,isSearchable,errors,onSubmit,onSearch} = useFormData();
+=======
+import { useForm} from 'react-hook-form'
+import { object, string,InferType } from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useState} from 'react';
+import Button from '../components/Button'
+import ERROR_MESSAGE, { ERROR_MESSAGES } from '../messages'
+
+const validationSchema = object().shape({
+  postalCode: string()
+    .required(ERROR_MESSAGE.required)
+    .matches(/^\d{7}$/, ERROR_MESSAGE.not7digits),
+  prefecture: string().required(ERROR_MESSAGE.required),
+  city: string()
+    .required(ERROR_MESSAGE.required),
+}).required();
+
+type FormData = InferType<typeof validationSchema>;
+
+const Practice4: React.FC = () => {
+  const [canSubmit, isSubmittable] = useState<boolean>(true);
+  const [canSearch, isSearchable] = useState<boolean>(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }, getValues,setValue,trigger,
+  } = useForm<FormData>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      postalCode: '',
+      prefecture: '',
+      city: '',
+    },
+    mode: 'onBlur',reValidateMode: 'onBlur',
+  });
+
+  // Form submission handler
+  const onSubmit = handleSubmit(data => {
+    console.log(data);
+  });    
+
+  const onSearch = async() => 
+    {
+      const currentPostalCode = getValues('postalCode');
+      if(!currentPostalCode.trim())
+        isSearchable(false);
+
+      else if(currentPostalCode.length===7)
+      { 
+        try
+        {
+          const response = await fetch("https://zipcloud.ibsnet.co.jp/api/search?zipcode="+currentPostalCode);
+          const fields = await response.json();
+          setValue("postalCode",currentPostalCode);
+          setValue("prefecture",fields.results[0].address1);
+          setValue("city",fields.results[0].address2);
+          isSubmittable(true);
+        }
+
+        catch (error) {
+          setValue('city', '');
+          setValue('prefecture', '');
+          isSubmittable(false);
+        } finally {
+          trigger();
+        }
+        isSearchable(true);
+      }
+    };
+>>>>>>> feature/practice5
   return (
     <div className="m-auto flex flex-col gap-4">
       <h1 className="text-4xl text-center mt-2">addressSearch</h1>
@@ -17,7 +88,11 @@ const Practice4: React.FC = () => {
             id="postalCode" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
             {...register('postalCode')}
           />
+<<<<<<< HEAD
           {isSearchable && errors.postalCode && (
+=======
+          {canSearch && errors.postalCode && (
+>>>>>>> feature/practice5
             <p className="text-xs italic text-red-500">{errors.postalCode.message}</p>
           )}
           </div>
@@ -25,7 +100,11 @@ const Practice4: React.FC = () => {
           <Button title="search" onClick={onSearch} className=' bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
           Search
           </Button>
+<<<<<<< HEAD
           {isSearchable? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
+=======
+          {canSearch? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
+>>>>>>> feature/practice5
           </div>
           </div>
         </div>
@@ -53,7 +132,11 @@ const Practice4: React.FC = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
         {isSubmittable ? (
+=======
+        {canSubmit ? (
+>>>>>>> feature/practice5
           <Button title="submit" type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded'>
             送信
           </Button>
@@ -65,4 +148,9 @@ const Practice4: React.FC = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Practice4;
+=======
+export default Practice4;
+
+>>>>>>> feature/practice5
